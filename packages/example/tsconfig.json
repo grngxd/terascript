@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "ES2022",
+        "target": "ES2022",
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "rootDir": "src",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "typeRoots": ["../types"]
+    },
+    "include": [
+        "src/**/*.ts",
+        "../types"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}
