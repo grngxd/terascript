@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "target": "ES2022",
+        "module": "ESNext",
+        "moduleResolution": "Node",
+        "sourceMap": true,
+        "outDir": "./out",
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "baseUrl": "packages",
+        "paths": {
+            "ScratchJS": ["./ScratchJS.d.ts"]
+        },
+        "typeRoots": [
+            "./node_modules/@types",
+            "./types"
+        ],
+        "types": [
+            "node"
+        ]
+    },
+    "include": [
+        "packages/**/*.ts",
+        "packages/**/*.d.ts",
+        "example/**/*.ts"
+    ],
+    "exclude": [
+        "/node_modules"
+    ]
+}
