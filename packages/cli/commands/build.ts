@@ -21,10 +21,10 @@ export const buildCommand: CommandModule = {
 
       const start = performance.now();
 
-
+      
       await generator.generate().then((p) => {
         const end = performance.now();
-        const duration = (end - start)
+        const duration = (end - start) / 1000;
         console.log(`Project built to ${path.resolve(p)} in ${duration.toFixed(3)}s`);
       });
     } catch (e) {
