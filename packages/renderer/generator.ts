@@ -29,10 +29,13 @@ export const render = async () => {
         });
     });
 
-    await createSb3(JSON.stringify(scratchProject), [], []);
-
     return scratchProject;
 };
+
+export const generate = async () => {
+    const renderedProject = JSON.stringify(await render());
+    return await createSb3(renderedProject, [], []);
+};  
 
 const renderers: Partial<Record<ts.SyntaxKind, (scratchProject: ScratchProject, node: Node, checker: TypeChecker) => void>> = {
     [ts.SyntaxKind.VariableDeclaration]: (scratchProject, node, checker) => renderVariableDeclaration(scratchProject, node as VariableDeclaration, checker),

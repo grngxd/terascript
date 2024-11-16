@@ -27,4 +27,6 @@ export const createSb3 = async (projectFile: string, costumeFiles: string[], sou
         path.join(config.outDir, `${config.name.toLowerCase().replaceAll(" ", "-")}.sb3`),
         content
     );
+
+    return path.join(config.outDir, `${config.name.toLowerCase().replaceAll(" ", "-")}.sb3`)
 }
