@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "cli": "tsx ./packages/cli/index.ts",
+    "cli:example": "tsx ./packages/cli/index.ts --cwd ./packages/example",
     "test": "mocha ./packages/**/*.test.ts --require tsx --timeout 0",
     "test:watch": "mocha ./packages/**/*.test.ts --watch --require tsx --timeout 0"
   },

@@ -1,5 +1,6 @@
 import { getConfig } from '+core/config';
 import * as generator from '+renderer/generator';
+import path from 'path';
 import { CommandModule } from 'yargs';
 
 export const buildCommand: CommandModule = {
@@ -13,15 +14,22 @@ export const buildCommand: CommandModule = {
     });
   },
   handler: async (argv) => {
-    const config = await getConfig();
+    try {
+      const config = await getConfig();
 
-    console.log('Building project...');
-    console.log(`Environment: ${argv.prod ? 'production' : 'development'}`);
+      console.log('Building project...');
 
-    const p = performance.now();
-    // Build the project
-    await generator.generate().then((path) => {
-      console.log(`Project built to ${path} in ${performance.now() - p * 1000}s`);
-    });
+      const start = performance.now();
+
+
+      await generator.generate().then((p) => {
+        const end = performance.now();
+        const duration = (end - start)
+        console.log(`Project built to ${path.resolve(p)} in ${duration.toFixed(3)}s`);
+      });
+    } catch (e) {
+      console.error(e);
+      process.exit(1);
+    }
   },
 };
