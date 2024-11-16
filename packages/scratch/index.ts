@@ -1,8 +1,37 @@
+import { generate } from "short-uuid";
+import { ScratchBlocks, ScratchOpCodes } from "./ast";
+
 interface Target {
     isStage: boolean;
     name: string;
-    variables: Record<string, any>[];
-    lists: Record<string, any>[];
+    // { uuid: [name, value], ... }
+    variables: Record<string, [string, any]>;
+    lists: Record<string, [string, any]>;
+    x?: number;
+    y?: number;
+    blocks: ScratchBlocks;
+    broadcasts: Record<string, any>;
+    comments: Record<string, any>;
+    currentCostume: number;
+    costumes: any[];
+    sounds: any[];
+    volume: number;
+    layerOrder: number;
+}
+
+interface Sprite extends Target {
+    visible: boolean;
+    size: number;
+    direction: number;
+    draggable: boolean;
+    rotationStyle: string;
+}
+
+interface Stage extends Target {
+    tempo: number;
+    videoTransparency: number;
+    videoState: string;
+    textToSpeechLanguage: string | null;
 }
 
 interface Meta {
@@ -24,9 +53,23 @@ export class ScratchProject {
             {
                 isStage: true,
                 name: "Stage",
-                variables: [],
-                lists: [],
-            }
+                variables: {}, // Initialize variables as an object
+                lists: {}, // Initialize lists as an object
+                x: 0,
+                y: 0,
+                blocks: {},
+                broadcasts: {},
+                comments: {},
+                currentCostume: 0,
+                costumes: [],
+                sounds: [],
+                volume: 100,
+                layerOrder: 0,
+                tempo: 60,
+                videoTransparency: 50,
+                videoState: "off",
+                textToSpeechLanguage: null,
+            } as Stage,
         ],
         monitors: [],
         extensions: [],
@@ -37,20 +80,23 @@ export class ScratchProject {
         },
     };
 
-    private findTarget(targetName: string): Target | undefined {
+    findTarget(targetName: string): Target | undefined {
         return this.data.targets.find(t => t.name === targetName);
     }
 
-    variable(target: string, name: string, value: any = null) {
-        const targetObj = this.findTarget(target);
+    variable(target: string | undefined, name: string, value: any = null) {
+        const targetObj = this.findTarget(target || "Stage");
         if (!targetObj) {
             throw new Error(`Target ${target} not found`);
         }
 
         if (value === null) {
-            return targetObj.variables.find(v => v[name]);
+            return Object.entries(targetObj.variables).find(([_, [n]]) => n === name);
         } else {
-            targetObj.variables.push({ [name]: [name, value] });
+            const uuid = generate();
+            targetObj.variables[uuid] = [name, value];
+
+            return uuid;
         }
     }
 
@@ -61,23 +107,105 @@ export class ScratchProject {
         }
 
         if (value === null) {
-            return targetObj.lists.find(l => l[name]);
+            return Object.entries(targetObj.lists).find(([_, [n]]) => n === name);
         } else {
-            targetObj.lists.push({ [name]: [name, value] });
+            const uuid = generate();
+            targetObj.lists[uuid] = [name, value];
+
+            return uuid;
         }
     }
 
     sprite(name: string) {
-        let targetObj = this.findTarget(name);
+        let targetObj = this.findTarget(name) as Sprite;
         if (!targetObj) {
             targetObj = {
                 isStage: false,
-                name: name,
-                variables: [],
-                lists: [],
-            };
+                name,
+                variables: {},
+                lists: {},
+                x: 0,
+                y: 0,
+                blocks: {},
+                broadcasts: {},
+                comments: {},
+                currentCostume: 0,
+                costumes: [],
+                sounds: [],
+                volume: 100,
+                layerOrder: 0,
+                visible: true,
+                size: 100,
+                direction: 90,
+                draggable: false,
+                rotationStyle: "all around",
+            }
             this.data.targets.push(targetObj);
         }
         return targetObj;
     }
+
+    createBlock(options: {
+        target: string;
+        opcode: ScratchOpCodes;
+        next?: string;
+        parent?: string;
+        x?: number;
+        y?: number;
+        topLevel?: boolean;
+        inputs?: Record<string, any>;
+        fields?: Record<string, any>;
+        shadow?: boolean;
+    }) {
+        const targetObj = this.findTarget(options.target);
+        if (!targetObj) {
+            throw new Error(`Target ${options.target} not found`);
+        }
+
+        const id = ScratchProject.generateUniqueId();
+        targetObj.blocks[id] = {
+            id,
+            opcode: options.opcode,
+            next: options.next,
+            parent: options.parent,
+            x: options.x,
+            y: options.y,
+            topLevel: options.topLevel,
+            inputs: options.inputs,
+            fields: options.fields,
+            shadow: options.shadow,
+        };
+
+        return id;
+    };
+
+    editBlock(target: string, id: string, options: Partial<ScratchBlocks>) {
+        const targetObj = this.findTarget(target);
+        if (!targetObj) {
+            throw new Error(`Target ${target} not found`);
+        }
+
+        if (!targetObj.blocks[id]) {
+            throw new Error(`Block ${id} not found in target ${target}`);
+        }
+
+        targetObj.blocks[id] = { ...targetObj.blocks[id], ...options };
+    }
+
+    toJSON() {
+        return this.data;
+    }
+
+    private static generateUniqueId(): string {
+        return Math.random().toString(36).slice(2, 11);
+    }
+
+    static fromJSON(data: ScratchData) {
+        const s = new ScratchProject()
+        s.data = data;
+        return s;
+    }
+
+    addCostume(costume: string) {}
+    addSound(sound: string) {}
 }

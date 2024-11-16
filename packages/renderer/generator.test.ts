@@ -1,8 +1,9 @@
 import { expect } from "chai";
+import { writeFileSync } from "fs";
 import { Project } from "ts-morph";
-import { morph, render } from "./renderer";
+import { morph, render } from "./generator";
 
-describe("renderer.morph()", () => {
+describe("generator.morph()", () => {
     it("should return a ts-morph project", async () => {
         const project = await morph();
         expect(project).to.be.instanceOf(Project);
@@ -31,12 +32,14 @@ describe("renderer.morph()", () => {
     });
 });
 
-describe("renderer.render()", () => {
+describe("generator.render()", () => {
     it("should render a project", async () => {
         const renderedProject = await render();
         expect(renderedProject).to.be.an("object");
-        expect(renderedProject.targets).to.be.an("array");
-        expect(renderedProject.monitors).to.be.an("array");
-        expect(renderedProject.extensions).to.be.an("array");
+        expect(renderedProject.data.targets).to.be.an("array");
+        expect(renderedProject.data.monitors).to.be.an("array");
+        expect(renderedProject.data.extensions).to.be.an("array");
+
+        writeFileSync("../../project.json", JSON.stringify(renderedProject.data, null, 2));
     });
 });

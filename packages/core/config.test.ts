@@ -5,7 +5,7 @@ describe('core.config.getConfig()', () => {
 	it('should load the configuration', async () => {
 		const config = await getConfig();
 		expect(config).to.have.property('name');
-		expect(config).to.have.property('outFile');
+		expect(config).to.have.property('outDir');
 		expect(config).to.have.property('assetsDir');
 	});
 
@@ -29,6 +29,7 @@ describe('core.config.getConfig()', () => {
 		const config = await getConfig();
 		expect(config).to.be.an('object');
 		expect(config).to.have.property('name').that.is.a('string');
-		expect(config).to.have.property('outFile').that.is.a('string');
+		expect(config).to.have.property('outDir').that.is.a('string');
+		expect(config).to.have.property('assetsDir').that.is.a('string');
 	});
 });

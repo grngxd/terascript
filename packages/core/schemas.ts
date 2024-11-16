@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const ScratchProjectSchema = z.object({
     name: z.string(),
-    outFile: z.string(),
+    outDir: z.string(),
     assetsDir: z.string(),
 });
 

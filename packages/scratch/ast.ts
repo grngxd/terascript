@@ -1,5 +1,5 @@
 // scratch opcodes
-export enum OpCodes {
+export enum ScratchOpCodes {
     // Motion
     MOVE_STEPS = "motion_movesteps",
     TURN_RIGHT = "motion_turnright",
@@ -13,26 +13,26 @@ export enum OpCodes {
     WAIT = "control_wait",
 }
 
-export type OpCode = keyof typeof OpCodes;
+export type ScratchOpCode = keyof typeof ScratchOpCodes;
 
-export type MotionOpcode =
-    | OpCodes.MOVE_STEPS
-    | OpCodes.TURN_RIGHT
-    | OpCodes.TURN_LEFT
-    | OpCodes.GOTO_XY;
+export type ScratchMotionOpcode =
+    | ScratchOpCodes.MOVE_STEPS
+    | ScratchOpCodes.TURN_RIGHT
+    | ScratchOpCodes.TURN_LEFT
+    | ScratchOpCodes.GOTO_XY;
 
-export type LooksOpcode =
-    | OpCodes.SAY;
+export type ScratchLooksOpcode =
+    | ScratchOpCodes.SAY;
 
-export type EventOpcode =
-    | OpCodes.WHEN_FLAG_CLICKED;
+export type ScratchEventOpcode =
+    | ScratchOpCodes.WHEN_FLAG_CLICKED;
 
-export type ControlOpcode =
-    | OpCodes.WAIT;
+export type ScratchControlOpcode =
+    | ScratchOpCodes.WAIT;
 
-export type Block = {
+export type ScratchBlock = {
     id: string;
-    opcode: OpCode;
+    opcode: ScratchOpCodes;
     next?: string;
     parent?: string;
     x?: number;
@@ -43,4 +43,23 @@ export type Block = {
     shadow?: boolean;
 }
 
-export type Blocks = Record<string, Block>;
+export type ScratchBlocks = Record<string, ScratchBlock>;
+
+export function parseBlocks(blocksData: any): ScratchBlocks {
+    const blocks: ScratchBlocks = {};
+    for (const [id, data] of Object.entries(blocksData)) {
+        blocks[id] = {
+            id,
+            opcode: (data as any).opcode as ScratchOpCodes,
+            next: (data as any).next,
+            parent: (data as any).parent,
+            x: (data as any).x,
+            y: (data as any).y,
+            topLevel: (data as any).topLevel,
+            inputs: (data as any).inputs,
+            fields: (data as any).fields,
+            shadow: (data as any).shadow,
+        };
+    }
+    return blocks;
+}

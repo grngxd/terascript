@@ -1,190 +1,40 @@
 {
-    "targets": [
-        {
-            "isStage": true,
-            "name": "Stage",
-            "variables": {
-                "`jEk@4|i[#Fk?(8x)AV.-my variable": [
-                    "my variable",
-                    0
-                ]
-            },
-            "lists": {},
-            "broadcasts": {},
-            "blocks": {},
-            "comments": {},
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "backdrop1",
-                    "dataFormat": "svg",
-                    "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
-                    "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
-                    "rotationCenterX": 240,
-                    "rotationCenterY": 180
-                }
-            ],
-            "sounds": [
-                {
-                    "name": "pop",
-                    "assetId": "83a9787d4cb6f3b7632b4ddfebf74367",
-                    "dataFormat": "wav",
-                    "format": "",
-                    "rate": 48000,
-                    "sampleCount": 1124,
-                    "md5ext": "83a9787d4cb6f3b7632b4ddfebf74367.wav"
-                }
-            ],
-            "volume": 100,
-            "layerOrder": 0,
-            "tempo": 60,
-            "videoTransparency": 50,
-            "videoState": "on",
-            "textToSpeechLanguage": null
-        },
-        {
-            "isStage": false,
-            "name": "Sprite1",
-            "variables": {},
-            "lists": {},
-            "broadcasts": {},
-            "blocks": {
-                ")fCA#QvENDTAEj92Th6H": {
-                    "opcode": "event_whenflagclicked",
-                    "next": "$|4CvErxmKW79.=l.VW=",
-                    "parent": null,
-                    "inputs": {},
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": true,
-                    "x": 696,
-                    "y": 168
-                },
-                "$fY|@Y%TK;V|@@0s[(FB": {
-                    "opcode": "motion_movesteps",
-                    "next": "/6-d|d0}Yift)#C]C-J*",
-                    "parent": "D*`qzy3ru#YszBKQwg_`",
-                    "inputs": {
-                        "STEPS": [
-                            1,
-                            [
-                                4,
-                                "50"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "/6-d|d0}Yift)#C]C-J*": {
-                    "opcode": "looks_say",
-                    "next": null,
-                    "parent": "$fY|@Y%TK;V|@@0s[(FB",
-                    "inputs": {
-                        "MESSAGE": [
-                            1,
-                            [
-                                10,
-                                "Hello!"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "$|4CvErxmKW79.=l.VW=": {
-                    "opcode": "motion_gotoxy",
-                    "next": "D*`qzy3ru#YszBKQwg_`",
-                    "parent": ")fCA#QvENDTAEj92Th6H",
-                    "inputs": {
-                        "X": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ],
-                        "Y": [
-                            1,
-                            [
-                                4,
-                                "0"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                },
-                "D*`qzy3ru#YszBKQwg_`": {
-                    "opcode": "control_wait",
-                    "next": "$fY|@Y%TK;V|@@0s[(FB",
-                    "parent": "$|4CvErxmKW79.=l.VW=",
-                    "inputs": {
-                        "DURATION": [
-                            1,
-                            [
-                                5,
-                                "1"
-                            ]
-                        ]
-                    },
-                    "fields": {},
-                    "shadow": false,
-                    "topLevel": false
-                }
-            },
-            "comments": {},
-            "currentCostume": 0,
-            "costumes": [
-                {
-                    "name": "costume1",
-                    "bitmapResolution": 1,
-                    "dataFormat": "svg",
-                    "assetId": "bcf454acf82e4504149f7ffe07081dbc",
-                    "md5ext": "bcf454acf82e4504149f7ffe07081dbc.svg",
-                    "rotationCenterX": 48,
-                    "rotationCenterY": 50
-                },
-                {
-                    "name": "costume2",
-                    "bitmapResolution": 1,
-                    "dataFormat": "svg",
-                    "assetId": "0fb9be3e8397c983338cb71dc84d0b25",
-                    "md5ext": "0fb9be3e8397c983338cb71dc84d0b25.svg",
-                    "rotationCenterX": 46,
-                    "rotationCenterY": 53
-                }
-            ],
-            "sounds": [
-                {
-                    "name": "Meow",
-                    "assetId": "83c36d806dc92327b9e7049a565c6bff",
-                    "dataFormat": "wav",
-                    "format": "",
-                    "rate": 48000,
-                    "sampleCount": 40682,
-                    "md5ext": "83c36d806dc92327b9e7049a565c6bff.wav"
-                }
-            ],
-            "volume": 100,
-            "layerOrder": 1,
-            "visible": true,
-            "x": 50,
-            "y": 0,
-            "size": 100,
-            "direction": 90,
-            "draggable": false,
-            "rotationStyle": "all around"
-        }
-    ],
-    "monitors": [],
-    "extensions": [],
-    "meta": {
-        "semver": "3.0.0",
-        "vm": "4.8.75",
-        "agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:128.0) Gecko/20100101 Firefox/128.0"
+  "targets": [
+    {
+      "isStage": true,
+      "name": "Stage",
+      "variables": {
+        "9WF8svuXmUoWDLRu4ZzqF7": [
+          "a",
+          5
+        ],
+        "9FFPyswqJnf4HQmyXatdf1": [
+          "b",
+          15
+        ]
+      },
+      "lists": {},
+      "x": 0,
+      "y": 0,
+      "blocks": {},
+      "broadcasts": {},
+      "comments": {},
+      "currentCostume": 0,
+      "costumes": [],
+      "sounds": [],
+      "volume": 100,
+      "layerOrder": 0,
+      "tempo": 60,
+      "videoTransparency": 50,
+      "videoState": "off",
+      "textToSpeechLanguage": null
     }
+  ],
+  "monitors": [],
+  "extensions": [],
+  "meta": {
+    "semver": "3.0.0",
+    "vm": "0.2.0-prerelease.20190515153227",
+    "agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) ScratchDesktop/3.3.0 Chrome/69.0.3497.128 Electron/4.2.0 Safari/537.36"
+  }
 }
