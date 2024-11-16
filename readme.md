@@ -9,7 +9,7 @@ terascript is a silly little typescript compiler that compiles typescript to scr
 i dont know
 
 ## License
-ill sue you into oblivion if you even think about trying to learn from this (its horrendous) (its MIT)
+ill sue you into oblivion if you even think about trying to somehow learn from this mistake (its horrendous) (its MIT)
 
 ## Contributing
 please dont
