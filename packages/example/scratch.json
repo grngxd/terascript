@@ -1,0 +1,135 @@
+{
+  "targets": [
+    {
+      "isStage": true,
+      "name": "Stage",
+      "variables": {
+        "njMXsqk6kykA2GqTuVMvr8": [
+          "a",
+          0
+        ],
+        "bJbri55NmJ2snvqQtiNQDS": [
+          "b",
+          0
+        ]
+      },
+      "lists": {},
+      "x": 0,
+      "y": 0,
+      "blocks": {
+        "ojfATWUByN1UYrYUDiXVhw": {
+          "id": "ojfATWUByN1UYrYUDiXVhw",
+          "opcode": "math_number",
+          "fields": {
+            "NUM": "5"
+          }
+        },
+        "7HP1bePQ9T8kUFp6b7GUgD": {
+          "id": "7HP1bePQ9T8kUFp6b7GUgD",
+          "opcode": "event_whenflagclicked",
+          "inputs": {},
+          "fields": {},
+          "shadow": false,
+          "topLevel": true,
+          "x": 10,
+          "y": 10
+        },
+        "wvag2NorDpvV2DXXrwwMEp": {
+          "id": "wvag2NorDpvV2DXXrwwMEp",
+          "opcode": "data_setvariableto",
+          "next": "wvag2NorDpvV2DXXrwwMEp",
+          "parent": "7HP1bePQ9T8kUFp6b7GUgD",
+          "inputs": {
+            "VALUE": [
+              1,
+              "ojfATWUByN1UYrYUDiXVhw"
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "a",
+              "hb2HgUHCvVdYgPnbEGJv5d"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        },
+        "cpVdXmTU72iZ2ciZQaPMNC": {
+          "id": "cpVdXmTU72iZ2ciZQaPMNC",
+          "opcode": "math_number",
+          "fields": {
+            "NUM": "5"
+          }
+        },
+        "kb4aRFHzZ8Cj4t9u9re6hE": {
+          "id": "kb4aRFHzZ8Cj4t9u9re6hE",
+          "opcode": "math_number",
+          "fields": {
+            "NUM": "5"
+          }
+        },
+        "jQqyaXCxmqt4RPRbHtgP7Q": {
+          "id": "jQqyaXCxmqt4RPRbHtgP7Q",
+          "opcode": "operator_add",
+          "inputs": {
+            "NUM1": [
+              1,
+              "cpVdXmTU72iZ2ciZQaPMNC"
+            ],
+            "NUM2": [
+              1,
+              "kb4aRFHzZ8Cj4t9u9re6hE"
+            ]
+          }
+        },
+        "3KmU3SSXKDU7uN2y8ChdrL": {
+          "id": "3KmU3SSXKDU7uN2y8ChdrL",
+          "opcode": "data_setvariableto",
+          "next": "3KmU3SSXKDU7uN2y8ChdrL",
+          "parent": "7HP1bePQ9T8kUFp6b7GUgD",
+          "inputs": {
+            "VALUE": [
+              1,
+              "cpVdXmTU72iZ2ciZQaPMNC"
+            ]
+          },
+          "fields": {
+            "VARIABLE": [
+              "b",
+              "kUEghHQMyHLYSLomfRAmNM"
+            ]
+          },
+          "shadow": false,
+          "topLevel": false
+        }
+      },
+      "broadcasts": {},
+      "comments": {},
+      "currentCostume": 0,
+      "costumes": [
+        {
+          "assetId": "cd21514d0531fdffb22204e0ec5ed84a",
+          "name": "backdrop1",
+          "md5ext": "cd21514d0531fdffb22204e0ec5ed84a.svg",
+          "dataFormat": "svg",
+          "rotationCenterX": 240,
+          "rotationCenterY": 180
+        }
+      ],
+      "sounds": [],
+      "volume": 100,
+      "layerOrder": 0,
+      "tempo": 60,
+      "videoTransparency": 50,
+      "videoState": "off",
+      "textToSpeechLanguage": null
+    }
+  ],
+  "monitors": [],
+  "extensions": [],
+  "meta": {
+    "semver": "3.0.0",
+    "vm": "0.2.0-prerelease.20190515153227",
+    "agent": "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) ScratchDesktop/3.3.0 Chrome/69.0.3497.128 Electron/4.2.0 Safari/537.36"
+  }
+}

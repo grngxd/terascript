@@ -1,5 +1,5 @@
 import { generate } from "short-uuid";
-import { ScratchBlocks, ScratchOpCodes } from "./ast";
+import { ScratchBlock, ScratchBlocks, ScratchOpCodes } from "./ast";
 
 interface Target {
     isStage: boolean;
@@ -53,15 +53,24 @@ export class ScratchProject {
             {
                 isStage: true,
                 name: "Stage",
-                variables: {}, // Initialize variables as an object
-                lists: {}, // Initialize lists as an object
+                variables: {},
+                lists: {},
                 x: 0,
                 y: 0,
                 blocks: {},
                 broadcasts: {},
                 comments: {},
                 currentCostume: 0,
-                costumes: [],
+                costumes: [
+                    {
+                        assetId: "cd21514d0531fdffb22204e0ec5ed84a",
+                        name: "backdrop1",
+                        md5ext: "cd21514d0531fdffb22204e0ec5ed84a.svg",
+                        dataFormat: "svg",
+                        rotationCenterX: 240,
+                        rotationCenterY: 180,
+                    },
+                ],
                 sounds: [],
                 volume: 100,
                 layerOrder: 0,
@@ -179,7 +188,7 @@ export class ScratchProject {
         return id;
     };
 
-    editBlock(target: string, id: string, options: Partial<ScratchBlocks>) {
+    editBlock(target: string, id: string, options: Partial<ScratchBlock>) {
         const targetObj = this.findTarget(target);
         if (!targetObj) {
             throw new Error(`Target ${target} not found`);

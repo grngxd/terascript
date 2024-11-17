@@ -46,3 +46,5 @@ no
 no
 ### Can i xxxx?
 no
+
+*psst, dont forget to run `npm run cli:example -- -- build` to see the compiler in action!*

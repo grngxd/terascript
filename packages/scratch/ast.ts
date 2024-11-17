@@ -11,6 +11,19 @@ export enum ScratchOpCodes {
     WHEN_FLAG_CLICKED = "event_whenflagclicked",
     // Control
     WAIT = "control_wait",
+
+    // Operators
+    OPERATOR_ADD = "operator_add",
+    OPERATOR_SUBTRACT = "operator_subtract",
+    OPERATOR_MULTIPLY = "operator_multiply",
+    OPERATOR_DIVIDE = "operator_divide",
+
+    // Math
+    MATH_NUMBER = "math_number",
+
+    // Variables
+    DATA_SETVARIABLETO = "data_setvariableto",
+    DATA_VARIABLE = "data_variable",
 }
 
 export type ScratchOpCode = keyof typeof ScratchOpCodes;
