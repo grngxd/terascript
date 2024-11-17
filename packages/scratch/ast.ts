@@ -59,19 +59,21 @@ export type ScratchBlock = {
 export type ScratchBlocks = Record<string, ScratchBlock>;
 
 export function parseBlocks(blocksData: any): ScratchBlocks {
-    const blocks: ScratchBlocks = {};
+    let blocks: ScratchBlocks = {};
     for (const [id, data] of Object.entries(blocksData)) {
-        blocks[id] = {
-            id,
-            opcode: (data as any).opcode as ScratchOpCodes,
-            next: (data as any).next,
-            parent: (data as any).parent,
-            x: (data as any).x,
-            y: (data as any).y,
-            topLevel: (data as any).topLevel,
-            inputs: (data as any).inputs,
-            fields: (data as any).fields,
-            shadow: (data as any).shadow,
+        blocks = {
+            [id]: {
+                id,
+                opcode: (data as any).opcode as ScratchOpCodes,
+                next: (data as any).next,
+                parent: (data as any).parent,
+                x: (data as any).x,
+                y: (data as any).y,
+                topLevel: (data as any).topLevel,
+                inputs: (data as any).inputs,
+                fields: (data as any).fields,
+                shadow: (data as any).shadow,
+            }
         };
     }
     return blocks;

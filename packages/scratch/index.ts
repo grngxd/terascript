@@ -171,18 +171,22 @@ export class ScratchProject {
             throw new Error(`Target ${options.target} not found`);
         }
 
-        const id = ScratchProject.generateUniqueId();
-        targetObj.blocks[id] = {
-            id,
-            opcode: options.opcode,
-            next: options.next,
-            parent: options.parent,
-            x: options.x,
-            y: options.y,
-            topLevel: options.topLevel,
-            inputs: options.inputs,
-            fields: options.fields,
-            shadow: options.shadow,
+        const id = generate();
+        targetObj.blocks = {
+            ...targetObj.blocks,
+
+            [id]: {
+                id,
+                opcode: options.opcode,
+                next: options.next,
+                parent: options.parent,
+                x: options.x,
+                y: options.y,
+                topLevel: options.topLevel,
+                inputs: options.inputs,
+                fields: options.fields,
+                shadow: options.shadow,
+            }
         };
 
         return id;
@@ -203,10 +207,6 @@ export class ScratchProject {
 
     toJSON() {
         return this.data;
-    }
-
-    private static generateUniqueId(): string {
-        return Math.random().toString(36).slice(2, 11);
     }
 
     static fromJSON(data: ScratchData) {

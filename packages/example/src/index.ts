@@ -1,2 +1,2 @@
-const a = 5;
-const b = 5 + 5;
+const a = 7;
+const b = 5 + 10;

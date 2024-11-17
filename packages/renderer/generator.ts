@@ -1,5 +1,6 @@
 import { createSb3 } from "+builder/sb3";
 import { ScratchProject } from "+scratch";
+import { ScratchOpCodes } from "+scratch/ast";
 import { existsSync, writeFileSync } from "fs";
 import { Node, Project, ts, TypeChecker, VariableDeclaration } from "ts-morph";
 import { renderVariableDeclaration } from "./builtin/variables";
@@ -9,8 +10,7 @@ export const context: GeneratorContext = {
 }
 
 export type GeneratorContext = {
-    // { name: [uuid, value] }
-    variables: Record<string, [string, any]>;
+    variables: Record<string, [any, any]>;
 }
 
 export const morph = async (): Promise<Project> => {
@@ -41,7 +41,25 @@ export const render = async () => {
             }
         });
     });
-    
+
+    const wfc = scratchProject.createBlock({
+        target: "Stage",
+        opcode: ScratchOpCodes.WHEN_FLAG_CLICKED,
+        topLevel: true,
+        x: 0,
+        y: 0,
+    });
+
+    let lastBlockId: string | undefined = wfc;
+    Object.entries(context.variables).forEach(([name, [variableId, setVariableBlockId]]) => {
+        if (lastBlockId) {
+            scratchProject.editBlock("Stage", lastBlockId, {
+                next: setVariableBlockId,
+            });
+        }
+        lastBlockId = setVariableBlockId;
+    });
+
     writeFileSync("scratch.json", JSON.stringify(scratchProject, null, 2));
 
     return scratchProject;
