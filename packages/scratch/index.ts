@@ -1,3 +1,4 @@
+import constants from "+core/constants";
 import { generate } from "short-uuid";
 import { ScratchBlock, ScratchBlocks, ScratchOpCodes } from "./ast";
 
@@ -85,7 +86,7 @@ export class ScratchProject {
         meta: {
             semver: "3.0.0",
             vm: "0.2.0-prerelease.20190515153227",
-            agent: "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) ScratchDesktop/3.3.0 Chrome/69.0.3497.128 Electron/4.2.0 Safari/537.36",
+            agent: `terascript ${constants.version}, node ${process.version}, ${process.platform}:${process.arch}`,
         },
     };
 

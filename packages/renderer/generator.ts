@@ -6,11 +6,37 @@ import { Node, Project, ts, TypeChecker, VariableDeclaration } from "ts-morph";
 import { renderVariableDeclaration } from "./builtin/variables";
 
 export const context: GeneratorContext = {
-    variables: {},
+    sprites: {
+        "Stage": {
+            x: 0,
+            y: 0,
+            variables: {},
+            lists: {},
+            blocks: [],
+        },
+    },
 }
 
 export type GeneratorContext = {
-    variables: Record<string, [any, any]>;
+    sprites: Record<string, {
+        x: number;
+        y: number;
+        variables: Record<string, [any, any]>; // id: [variableId, setVariableBlockId]
+        lists: Record<string, [any, any]>; // id: [listId, setListBlockId]
+        // [ [ blockId:{ ... }, ... ], [ blockID: ] ]
+        blocks: {
+            target: string;
+            opcode: ScratchOpCodes;
+            next?: string;
+            parent?: string;
+            x?: number;
+            y?: number;
+            topLevel?: boolean;
+            inputs?: Record<string, any>;
+            fields?: Record<string, any>;
+            shadow?: boolean;
+        }[][];
+    }>;
 }
 
 export const morph = async (): Promise<Project> => {
@@ -51,7 +77,7 @@ export const render = async () => {
     });
 
     let lastBlockId: string | undefined = wfc;
-    Object.entries(context.variables).forEach(([name, [variableId, setVariableBlockId]]) => {
+    Object.entries(context.sprites["Stage"].blocks).forEach(([name, [variableId, setVariableBlockId]]) => {
         if (lastBlockId) {
             scratchProject.editBlock("Stage", lastBlockId, {
                 next: setVariableBlockId,
